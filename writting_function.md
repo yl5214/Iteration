@@ -92,3 +92,85 @@ z_score(iris)
 ```
 
     ## Error in z_score(iris): Argument should be numbers
+
+### Multiple outputs.
+
+Write a function that returns the mean and sd from a sample of numbers.
+
+``` r
+mean_and_sd = function(x) {
+  
+  if (!is.numeric(x)) {
+    stop("Argument should be numbers")
+  } else if (length(x) < 2) {
+    stop("You need at least 2 numbers to get z scores")
+  }
+
+  mean_x = mean(x)
+  sd_x = sd(x)
+  
+  tibble(
+    mean = mean_x,
+    sd = sd_x
+  )
+  
+}
+```
+
+Double check I did this right ..
+
+``` r
+mean_and_sd(x_vec)
+```
+
+    ## # A tibble: 1 × 2
+    ##    mean    sd
+    ##   <dbl> <dbl>
+    ## 1  5.02 0.250
+
+### Start getting means and sds
+
+``` r
+x_vec= rnorm(n=30, mean= 5, sd =.5)
+
+tibble(
+  mean= mean(x_vec),
+  sd= sd(x_vec)
+)
+```
+
+    ## # A tibble: 1 × 2
+    ##    mean    sd
+    ##   <dbl> <dbl>
+    ## 1  5.12 0.625
+
+Let’s write a function that uses `n`, a true mean, and true SD as
+inputs.
+
+``` r
+sim_mean_sd=function(n_obs, mu =5, sigma=1) {
+ 
+   x_vec= rnorm(n=n_obs, mean= mu, sd = sigma)
+
+tibble(
+  mean= mean(x_vec),
+  sd= sd(x_vec)
+)
+} 
+
+sim_mean_sd(n_obs= 3000, mu=50) #change the default value with mu=50
+```
+
+    ## # A tibble: 1 × 2
+    ##    mean    sd
+    ##   <dbl> <dbl>
+    ## 1  50.0 0.984
+
+``` r
+sim_mean_sd(12,24,4) #in the same order as before
+```
+
+    ## # A tibble: 1 × 2
+    ##    mean    sd
+    ##   <dbl> <dbl>
+    ## 1  24.5  4.20
