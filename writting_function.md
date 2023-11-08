@@ -174,3 +174,37 @@ sim_mean_sd(12,24,4) #in the same order as before
     ##    mean    sd
     ##   <dbl> <dbl>
     ## 1  24.5  4.20
+
+### LoTR words.
+
+``` r
+fellowship_ring = 
+  readxl::read_excel("LotR_Words.xlsx", range = "B3:D6") |>
+  mutate(movie = "fellowship_ring") |> 
+  janitor::clean_names() |> 
+  select(movie)
+
+lotr_load_and_tidy = function(path = "LotR_Words.xlsx", cell_range, movie_name) {
+  
+  movie_df = 
+    readxl::read_excel(path, range = cell_range) |>
+    mutate(movie = movie_name) |> 
+    janitor::clean_names() |> 
+    pivot_longer(
+      female:male,
+      names_to = "sex",
+      values_to = "words"
+    ) |> 
+    select(movie, everything())
+  
+  movie_df
+  
+}
+
+lotr_df = 
+  bind_rows(
+    lotr_load_and_tidy(cell_range = "B3:D6", movie_name = "fellowship_ring"),
+    lotr_load_and_tidy(cell_range = "F3:H6", movie_name = "two_towers"),
+    lotr_load_and_tidy(cell_range = "J3:L6", movie_name = "return_king")
+  )
+```
