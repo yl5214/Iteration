@@ -95,7 +95,7 @@ use a map function
 
 ```{r}
 sim_result_df =
-  expand_grid(
+  expand_grid( 
     sample_size = c(30, 60, 120, 240),
     iter = 1:1000
   ) |> 
@@ -113,8 +113,7 @@ sim_result_df |>
 ```
 
 
-
-## SLR
+## simple linear regression
 
 Goal is to write a function that simulates data and then fits a regression; then repeat to look at the distribution of estimated coefficients. 
 
@@ -163,7 +162,7 @@ sim_slr(n_obs = 30)
 ```
 
 
-run this a whole bunch of times
+run this a whole bunch of times (thousand times)
 
 ```{r}
 sim_results_df = 
@@ -191,6 +190,6 @@ sim_results_df |>
 
 sim_results_df |> 
   ggplot(aes(x = beta0_hat, y = beta1_hat)) + 
-  geom_point()
+  geom_point() #negatively correlated to each other
 
 ```

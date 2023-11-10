@@ -78,7 +78,7 @@ use a map function
 
 ``` r
 sim_result_df =
-  expand_grid(
+  expand_grid( 
     sample_size = c(30, 60, 120, 240),
     iter = 1:1000
   ) |> 
