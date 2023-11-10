@@ -292,7 +292,7 @@ can i regress `tmax` on `tmin` for each of these...?
 central_park_df = 
   weather_nest_df |> 
   pull(df) |> 
-  nth(1)
+  nth(1) #central park
 ```
 
 fit a linear regression for central park
